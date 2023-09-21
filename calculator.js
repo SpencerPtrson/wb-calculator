@@ -30,7 +30,14 @@ function sqrt(input) {
 
 function factorial(input) {
   result = input
-  // result = 5
+  
+  if (input < 0 || !Number.isInteger(input)) {
+    return;
+  }
+
+  if (input === 0) {
+    return 1;
+  }
 
   for (let i = 2; i < input; i++) {
     console.log(`${result} * ${i}`)
@@ -70,6 +77,20 @@ function calculate(expression) {
       return;
     }
   }
+  else if (tokens.length === 1){ // Factorial operation
+    // Input should look like "input!"
+    num1 = +(Array.from(tokens[0])[0]); // get first character from tokens[0] and cast it to a number
+    operator = Array.from(tokens[0])[1]; // get second character from tokens[0] and cast it to a number
+
+    console.log(num1);
+    console.log(operator);
+
+    if (Number.isNaN(num1) || operator !== "!") { // Make sure num1 is a positive integer and the operator is a !
+      alert("Invalid Expression! Try again.");
+      return;
+    }
+
+  }
   else {
     alert("Invalid Expression! Try again.");
     return;
@@ -91,6 +112,8 @@ function calculate(expression) {
       return modulus(num1, num2);
     case ('sqrt') :
       return sqrt(num1);
+    case ('!'):
+      return factorial(num1);
     default:
       alert("That operator is not supported.");
       break;
