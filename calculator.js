@@ -28,6 +28,17 @@ function sqrt(input) {
   return Math.sqrt(input);
 }
 
+function factorial(input) {
+  result = input
+  // result = 5
+
+  for (let i = 2; i < input; i++) {
+    console.log(`${result} * ${i}`)
+    result = result * i;
+  }
+
+  return result;
+}
 
 function calculate(expression) {
   expression = expression.trim();
@@ -42,30 +53,25 @@ function calculate(expression) {
   // if there's two arguments, it's a sqrt operation
   if (tokens.length === 2) {
     operator = tokens[0];
-    num2 = +tokens[1];
+    num1 = +tokens[1];
 
-    console.log(num1);
-    console.log(operator);
-    console.log(num2);
-
+    if (Number.isNaN(num1)) {
+      alert("Not a number! Try again.");
+      return;
+    }
   }
   else if (tokens.length === 3) { // if there are three arguments, it's a normal expression
     num1 = +tokens[0];
     operator = tokens[1];
     num2 = +tokens[2];
 
-    console.log(num1);
-    console.log(operator);
-    console.log(num2);
+    if(Number.isNaN(num1) || Number.isNaN(num2)) {
+      alert("Not a number! Try again.");
+      return;
+    }
   }
   else {
-    alert("Please enter your equation in the formats shown on the page.");
-  }
-
-  if(Number.isNaN(num1) || Number.isNaN(num2)) {
-    alert("Only numbers can be entered into the calculator.");
-    alert("This calculator only takes 2 numbers and an operator at a time.");
-    alert("Make sure there is a space between each argument.");
+    alert("Invalid Expression! Try again.");
     return;
   }
 
@@ -84,9 +90,10 @@ function calculate(expression) {
     case ('%') :
       return modulus(num1, num2);
     case ('sqrt') :
-      return sqrt(num2);
+      return sqrt(num1);
     default:
-      return "That operator is not supported.";
+      alert("That operator is not supported.");
+      break;
   }
 }
 
@@ -103,5 +110,3 @@ document.querySelector('#submitButton').addEventListener('click', () => {
     document.querySelector('#answer').innerText = result;
   }
 });
-
-
